@@ -1,6 +1,7 @@
 package com.carla.contentplatformapi.services;
 
 import com.carla.contentplatformapi.domain.User;
+import com.carla.contentplatformapi.dto.UserDTO;
 import com.carla.contentplatformapi.repository.UserRepository;
 import com.carla.contentplatformapi.services.exception.ObjectNotFoundException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,4 +25,11 @@ public class UserService {
         return obj.orElseThrow(() -> new ObjectNotFoundException("Object not found!"));
     }
 
+    public User insert(User obj){
+        return repository.insert(obj);
+    }
+
+    public User fromDTO(UserDTO objDTO){
+        return new User(objDTO.getId(), objDTO.getName(), objDTO.getEmail());
+    }
 }

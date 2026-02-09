@@ -3,6 +3,7 @@ package com.carla.contentplatformapi.config;
 import com.carla.contentplatformapi.domain.Post;
 import com.carla.contentplatformapi.domain.User;
 import com.carla.contentplatformapi.dto.AuthorDTO;
+import com.carla.contentplatformapi.dto.CommentDTO;
 import com.carla.contentplatformapi.repository.PostRepository;
 import com.carla.contentplatformapi.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,13 @@ public class Instantiation implements CommandLineRunner {
 
         Post post1 = new Post(null, format.parse("21/03/2018"), "Trip time!", "I'm traveling to São Paulo. See you!", new AuthorDTO(maria));
         Post post2 = new Post(null, format.parse("23/03/2018"), "Good morning!", "Feeling happy this morning!", new AuthorDTO(maria));
+
+        CommentDTO comment1 = new CommentDTO("Have a nice trip!", format.parse("21/03/2018"), new AuthorDTO(alex));
+        CommentDTO comment2 = new CommentDTO("Enjoy!", format.parse("22/03/2018"), new AuthorDTO(bob));
+        CommentDTO comment3 = new CommentDTO("Have a nice day!", format.parse("23/03/2018"), new AuthorDTO(alex));
+        post1.getComments().addAll(Arrays.asList(comment1, comment2));
+        post2.getComments().addAll(Arrays.asList(comment3));
+
         postRepository.saveAll(Arrays.asList(post1, post2));
 
         maria.getPosts().addAll(Arrays.asList(post1, post2));
